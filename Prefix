@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+set -o noglob
+
+# prevent existing env breaking this script
+unset TEA_DESTDIR
+unset TEA_VERSION
+
+unset stop
+while test "$#" -gt 0 -a -z "$stop"; do
+	case $1 in
+	--prefix)
+		# we don’t use TEA_PREFIX so any already installed tea that we use in this script doesn’t break
+		TEA_DESTDIR="$2"
+		if test -z "$TEA_DESTDIR"; then
+			echo "tea: error: --prefix requires an argument" >&2
+			exit 1
+		fi
+		shift;shift;;
+	--version)
+		TEA_VERSION="$2"
+		if test -z "$TEA_VERSION"; then
+			echo "tea: error: --version requires an argument" >&2
+			exit 1
+		fi
+		shift;shift;;
+	--yes|-y)
+		TEA_YES=1
+		shift;;
+	--help|-h)
+		echo "tea: docs: https://github.com/teaxyz/setup"
+		exit;;
+	*)
+		stop=1;;
+	esac
+done
+unset stop
