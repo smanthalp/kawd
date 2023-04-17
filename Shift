@@ -1,0 +1,73 @@
+# gather arguments
+while (( "$#" )); do
+    case "${1}"  in
+
+    --help | -h | h | help ) 
+                echo "${help_text}" && exit 0
+            ;;
+
+    --model=* | -m=* )
+                export DEVICE_MODEL="${1#*=}"
+                shift
+            ;;
+
+    --model* | -m* ) 
+                export DEVICE_MODEL="${2}"
+                shift
+                shift
+            ;;
+
+    --serial=* )
+                export SERIAL="${1#*=}"
+                shift
+            ;;
+
+    --serial* )
+                export SERIAL="${2}"
+                shift
+                shift
+            ;;
+
+    --board-serial=* )
+                export BOARD_SERIAL="${1#*=}"
+                shift
+            ;;
+
+    --board-serial* )
+                export BOARD_SERIAL="${2}"
+                shift
+                shift
+            ;;
+
+    --uuid=* )
+                export UUID="${1#*=}"
+                shift
+            ;;
+
+    --uuid* )
+                export UUID="${2}"
+                shift
+                shift
+            ;;
+
+    --mac-address=* )
+                export MAC_ADDRESS="${1#*=}"
+                shift
+            ;;
+
+    --mac-address* )
+                export MAC_ADDRESS="${2}"
+                shift
+                shift
+            ;;
+
+    --width=* )
+                export WIDTH="${1#*=}"
+                shift
+            ;;
+
+    --width* )
+                export WIDTH="${2}"
+                shift
+                shift
+            ;;
